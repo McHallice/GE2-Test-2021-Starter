@@ -9,6 +9,10 @@ public class FPSController : MonoBehaviour
     public float speed = 50.0f;
     public float lookSpeed = 150.0f;
 
+     public GameObject prefabToInstantiate;
+    public float ballspeed = 7.0f;
+ 
+
     public bool allowPitch = true;
 
     public GUIStyle style;
@@ -112,9 +116,24 @@ public class FPSController : MonoBehaviour
             Pitch(-mouseY * lookSpeed * Time.deltaTime);
         }
 
+ 
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            GameObject newGameObject = (GameObject)Instantiate(prefabToInstantiate, mouseRay.origin, Quaternion.identity);
+            Rigidbody rb = newGameObject.GetComponent<Rigidbody>();
+ 
+            if (rb != null)
+            {
+                rb.velocity = mouseRay.direction * ballspeed;
+            }
+        }
+    
+
         float contWalk = Input.GetAxis("Vertical");
         float contStrafe = Input.GetAxis("Horizontal");
         Walk(contWalk * speed * Time.deltaTime);
         Strafe(contStrafe * speed * Time.deltaTime);
+
     }
 }
