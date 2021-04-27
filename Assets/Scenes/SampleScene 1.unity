@@ -500,6 +500,8 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   speed: 50
   lookSpeed: 150
+  prefabToInstantiate: {fileID: 0}
+  ballspeed: 7
   allowPitch: 1
   style:
     m_Name: 
